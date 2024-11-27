@@ -18,8 +18,18 @@ def load_csv_data(file_path):
 # Generate graphs as base64-encoded strings
 def create_graph(data, title, x, y):
     plt.figure(figsize=(x, y))
-    for column in data.columns[1:]:  # Skip the first column if it's an index/identifier
-        plt.plot(data.iloc[:, 0], data[column], label=column)
+    for col in data.columns[1:]:  # Skip the first column (assumed index or labels)
+    # Plot the line for all points except the last one
+        plt.plot(data[data.columns[0]][:-1], data[col][:-1], label=col, linestyle='-', color='blue')
+
+        # Plot the last segment (from second last to last) with the same color as the last value
+        plt.plot(data[data.columns[0]].iloc[-2:], data[col].iloc[-2:], linestyle='-', color='green', lw=2)
+
+        # Highlight the last value with a blue dot
+        plt.scatter(data[data.columns[0]].iloc[-1], data[col].iloc[-1], color='green', s=50, zorder=5)
+
+
+        
     plt.xlabel(data.columns[0])
     plt.ylabel("Views")
     plt.title(title)
@@ -41,26 +51,17 @@ def index():
     # Load data and create graphs for posts
     post_1_data = load_csv_data('data/post_1.csv')
     post_2_data = load_csv_data('data/post_2.csv')
-    post_1_predected_data = load_csv_data('data/post_1_predected.csv')
-    post_2_predected_data = load_csv_data('data/post_2_predected.csv')
     user_followers_data = load_csv_data('data/user_followers_data.csv')
-    user_followers_data_predected = load_csv_data('data/user_followers_data_predected.csv')
 
     post_1_graph = create_graph(post_1_data, "Acctual Data", 9, 4)
     post_2_graph = create_graph(post_2_data, "Acctual Data", 9, 4)
-    post_1_predected_data = create_graph(post_1_predected_data, "Predected Data For Next 6 Months", 9, 4)
-    post_2_predected_data = create_graph(post_2_predected_data, "Predected Data For Next 6 Months", 9, 4)
     user_followers_data = create_graph(user_followers_data, "User Followers Data", 13, 5)
-    user_followers_data_predected = create_graph(user_followers_data_predected, "User Followers Data Predection For Next 6 Months", 14, 5)
 
     return render_template(
         'templets/index.html',
         post_1_graph = post_1_graph,
         post_2_graph = post_2_graph,
-        post_1_predected_data = post_1_predected_data,
-        post_2_predected_data = post_2_predected_data,
         user_followers_data = user_followers_data,
-        user_followers_data_predected = user_followers_data_predected
     )
 
 if __name__ == "__main__":
