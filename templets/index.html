@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Dashboard</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Instagram Dashboard</h1>
+        <div id="user-info">
+            <h2>@naturewallpapersforu</h2>
+        </div>
+
+    </header>
+
+    <main class="main-store">
+        <div class="user-details">
+            <ul>
+                <li>Username: @naturewallpaperforu</li>
+                <li>Bio: We provide beautiful and minimal nature wallpapers for you, if you want to download them CLICK THE LINK IN THE BIO!</li>
+                <li>Account Type: Private</li>
+                <li>Followers: 794</li>
+                <li>Following: 68</li>
+            </ul>
+        </div>
+        <div class="user-followers-data">
+            <h2>User Followers Graph</h2>
+            <img src="{{ user_followers_data}}" alt="user_followers_data">
+            <img src="{{ user_followers_data_predected }}" alt="user_followers_data_predected">
+        </div>
+        <!-- Section for Post 1 -->
+         <div class="main-storee">
+        <section id="post-1">
+            <h2>Post 1</h2>
+            <div class="post">
+                <img src="../static/images/leaf.jpg" class="user-post" alt="">
+                <div class="image-container">
+                    <img src="{{ post_1_graph }}" alt="Post 1 Graph">
+                    <img src="{{ post_1_predected_data }}" alt="Post 1 Predected Graph">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section for Post 2 -->
+        <section id="post-2">
+            <h2>Post 2</h2>
+            <div class="post">
+                <img src="../static/images/cat.jpg" class="user-post" alt="">
+                <div class="image-container">
+                    <img src="{{ post_2_graph }}" alt="Post 2 Graph">
+                    <img src="{{ post_2_predected_data }}" alt="Post 2 Predected Graph">
+                </div>
+            </div>
+        </section>
+    </div>
+    </main>
+</body>
+</html>
